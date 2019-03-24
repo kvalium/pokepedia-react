@@ -3,11 +3,25 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Link from 'next/link';
 
 const styles = theme => ({
   root: {
     textAlign: 'center',
     paddingTop: theme.spacing.unit * 20,
+  },
+  container: {
+    display: 'grid',
+    gridAutoFlow: 'row',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridGap: '20px',
+    padding: 20,
+  },
+  element: {
+    display: 'block',
+    background: 'lightgray',
+    padding: 20,
+    borderRadius: 5,
   },
 });
 
@@ -23,7 +37,15 @@ function IndexComponent({ classes, searchPokemon, results }) {
         margin="normal"
         variant="outlined"
       />
-      <pre>{JSON.stringify(results, 0, 2)}</pre>
+      <div className={classes.container}>
+        {results.map(pokemon => (
+          <Link prefetch href={`/pokemon?id=${pokemon.id}`} as={`/pokemon/${pokemon.name}`}>
+            <div className={classes.element}>
+              <Typography variant="h4">{pokemon.name}</Typography>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

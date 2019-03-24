@@ -1,6 +1,6 @@
 import React from 'react';
 import IndexComponent from '../components/IndexComponent';
-import { getAllPokemons } from '../utils/PokemonUtils';
+import { getAllPokemons, fetchPokemons } from '../utils/PokemonUtils';
 
 class Index extends React.Component {
   constructor(props) {
@@ -23,9 +23,10 @@ class Index extends React.Component {
    * @param {String} term filter pokemons with this term
    */
   searchPokemon(term) {
-    if (term.length < 2) return;
+    if (term.length < 2) return this.setState({ results: [] });
     const { pokemons } = this.state;
-    this.setState({ results: pokemons.filter(p => p.name.includes(term)) });
+    return fetchPokemons(pokemons.filter(p => p.name.includes(term)))
+      .then(results => this.setState({ results }));
   }
 
   render() {
