@@ -1,31 +1,34 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
 import React from 'react';
-import IndexComponent from "../components/IndexComponent";
+import IndexComponent from '../components/IndexComponent';
 import { getAllPokemons } from '../utils/PokemonUtils';
 
-class Index extends React.Component{
-  constructor(props){
+class Index extends React.Component {
+  constructor(props) {
     super(props);
-    
+
     this.state = {
       loading: true,
       pokemons: [],
-      results: []
-    }
+      results: [],
+    };
   }
 
   // on mount, get Pokemons
   componentDidMount() {
-    const pokemons = getAllPokemons().then(pokemons => this.setState({pokemons, loading: false}));
+    getAllPokemons().then(pokemons => this.setState({ pokemons, loading: false }));
   }
 
-  searchPokemon(term){
-    this.setState({results: [term]});
+  /**
+   * Filter pokemons list using given term
+   * @param {String} term filter pokemons with this term
+   */
+  searchPokemon(term) {
+    if (term.length < 2) return;
+    this.setState({ results: this.state.pokemons.filter(p => p.name.includes(term)) });
   }
 
-  render(){
-    return this.state.loading ? <>Loading....</> : <IndexComponent results={this.state.results} pokemons={this.state.pokemons} searchPokemon={e => this.searchPokemon(e)} />
+  render() {
+    return this.state.loading ? <>Loading....</> : <IndexComponent results={this.state.results} searchPokemon={e => this.searchPokemon(e)} />;
   }
 }
 
