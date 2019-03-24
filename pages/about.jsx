@@ -25,7 +25,7 @@ function About(props) {
       </Typography>
       <Typography gutterBottom>
         <Link href="/">
-          <a>Go to the main page</a>
+          Go to the main page
         </Link>
       </Typography>
       <Button variant="contained" color="primary">
@@ -36,7 +36,9 @@ function About(props) {
 }
 
 About.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    root: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(About);

@@ -16,10 +16,12 @@
     "chalk": "^2.4.2",
     "express": "^4.16.4",
     "next": "^8.0.3",
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-jss": "^8.6.1",
-    "react-select": "^2.4.2"
+    "react-select": "^2.4.2",
+    "styled-jsx": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^5.15.3",

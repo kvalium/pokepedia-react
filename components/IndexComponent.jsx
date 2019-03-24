@@ -1,6 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -31,9 +29,18 @@ function IndexComponent({ classes, searchPokemon, results }) {
 }
 
 IndexComponent.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({
+    root: PropTypes.string.isRequired,
+  }).isRequired,
   searchPokemon: PropTypes.func.isRequired,
-  results: PropTypes.object,
+  results: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  })),
+};
+
+IndexComponent.defaultProps = {
+  results: [],
 };
 
 export default withStyles(styles)(IndexComponent);

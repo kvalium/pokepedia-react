@@ -24,11 +24,15 @@ class Index extends React.Component {
    */
   searchPokemon(term) {
     if (term.length < 2) return;
-    this.setState({ results: this.state.pokemons.filter(p => p.name.includes(term)) });
+    const { pokemons } = this.state;
+    this.setState({ results: pokemons.filter(p => p.name.includes(term)) });
   }
 
   render() {
-    return this.state.loading ? <>Loading....</> : <IndexComponent results={this.state.results} searchPokemon={e => this.searchPokemon(e)} />;
+    const { loading, results } = this.state;
+    return loading ? <>Loading....</> : (
+      <IndexComponent results={results} searchPokemon={e => this.searchPokemon(e)} />
+    );
   }
 }
 
