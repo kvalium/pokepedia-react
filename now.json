@@ -1,5 +1,5 @@
 {
-  "name": "serverless-pokedex",
+  "name": "pokedex",
   "version": 2,
   "builds": [
     { "src": "next.config.js", "use": "@now/next" }
