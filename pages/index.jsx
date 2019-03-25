@@ -25,7 +25,7 @@ class Index extends React.Component {
   searchPokemon(term) {
     if (term.length < 2) return this.setState({ results: [] });
     const { pokemons } = this.state;
-    return fetchPokemons(pokemons.filter(p => p.name.includes(term)))
+    return fetchPokemons(pokemons.filter(p => p.name.includes(term.toLowerCase())))
       .then(results => this.setState({ results }));
   }
 
